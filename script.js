@@ -10,56 +10,56 @@ function calculate() {
     var salary = document.getElementById('salary').value;
     var location = document.getElementById('location').value;
 
-    // Convert to numbers and create required values array
+    // Create required values array
     var requiredValues = [
-        bonus ? Number(bonus) : null,
-        job ? Number(job) : null,
-        vacation ? Number(vacation) : null,
-        start ? Number(start) : null,
-        move ? Number(move) : null,
-        insurance ? Number(insurance) : null,
-        salary ? Number(salary) : null,
-        location ? Number(location) : null
-];
+        bonus || null,
+        job || null,
+        vacation || null,
+        start || null,
+        move || null,
+        insurance || null,
+        salary || null,
+        location || null
+    ];
 
-// Define the options and their point values
-var bonus_options = [0, 400, 800, 1200, 1600];
-var job_assignment_options = [-2400, -1800, -1200, -600, 0];
-var vacation_time_options = [0, 1000, 2000, 3000, 4000];
-var starting_date_options = [0, 600, 1200, 1800, 2400];
-var moving_expense_options = [0, 200, 400, 600, 800];
-var insurance_coverage_options = [0, 800, 1600, 2400, 3200];
-var salary_options = [-6000, -4500, -3000, -1500, 0];
-var location_options = [0, 300, 600, 900, 1200];
+    // Define the options and their point values
+    var options = {
+        "bonus": {"10%": 0, "8%": 400, "6%": 800, "4%": 1200, "2%": 1600},
+        "job": {"Division E": -2400, "Division D": -1800, "Division C": -1200, "Division B": -600, "Division A": 0},
+        "vacation": {"25 days": 0, "20 days": 1000, "15 days": 2000, "10 days": 3000, "5 days": 4000},
+        "start": {"6/1/2023": 0, "6/15/2023": 600, "7/1/2023": 1200, "7/15/2023": 1800, "8/1/2023": 2400},
+        "move": {"100%": 0, "90%": 200, "80%": 400, "70%": 600, "60%": 800},
+        "insurance": {"Plan A": 0, "Plan B": 800, "Plan C": 1600, "Plan D": 2400, "Plan E": 3200},
+        "salary": {"$50000": -6000, "$48000": -4500, "$46000": -3000, "$44000": -1500, "$42000": 0},
+        "location": {"New York": 0, "Boston": 300, "Chicago": 600, "Atlanta": 900, "San Francisco": 1200}
+    };
 
-// Generate all combinations of options
-var all_combinations = cartesianProduct([bonus_options, job_assignment_options, vacation_time_options, 
-                                         starting_date_options, moving_expense_options, insurance_coverage_options, 
-                                         salary_options, location_options]);
+    // Generate all combinations of options
+    var all_combinations = cartesianProduct(Object.values(options));
 
-// Filter out combinations that don't meet the required values or don't sum to the desired total
-var valid_combinations = all_combinations.filter(combo => {
-    return combo.every((val, i) => requiredValues[i] === null || requiredValues[i] === val)
-        && combo.reduce((a, b) => a + b, 0) == points;
-});
+    // Filter out combinations that don't meet the required values or don't sum to the desired total
+    var valid_combinations = all_combinations.filter(combo => {
+        return combo.every((val, i) => requiredValues[i] === null || requiredValues[i] === Object.keys(options)[i] + ": " + val)
+            && combo.reduce((a, b) => a + options[Object.keys(options)[combo.indexOf(b)]][b.split(": ")[1]], 0) == points;
+    });
 
-// Display the valid combinations
-var output = document.getElementById('output');
-output.innerHTML = '';
-valid_combinations.forEach(combo => {
-    var p = document.createElement('p');
-    p.textContent = JSON.stringify(combo);
-    output.appendChild(p);
-});
+    // Display the valid combinations
+    var output = document.getElementById('output');
+    output.innerHTML = '';
+    valid_combinations.forEach(combo => {
+        var p = document.createElement('p');
+        p.textContent = JSON.stringify(combo);
+        output.appendChild(p);
+    });
 }
 
 // Helper function to generate cartesian product of multiple arrays
 function cartesianProduct(arr) {
-return arr.reduce(function(a,b){
-return a.map(function(x){
-  return b.map(function(y){
-    return x.concat(y);
-  })
-}).reduce(function(a,b){ return a.concat(b) },[])
-}, [[]])
+  return arr.reduce(function(a,b){
+    return a.map(function(x){
+      return b.map(function(y){
+        return x.concat(y);
+      })
+    }).reduce(function(a,b){ return a.concat(b) },[])
+  }, [[]])
 }
