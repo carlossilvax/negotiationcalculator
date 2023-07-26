@@ -4,26 +4,92 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+    <!-- 
+Bonus: '10%', '8%', '6%', '4%', '2%'
+Job Assignment: 'Division E', 'Division D', 'Division C', 'Division B', 'Division A'
+Vacation Time: '25 days', '20 days', '15 days', '10 days', '5 days'
+Starting Date: '6/1/2023', '6/15/2023', '7/1/2023', '7/15/2023', '8/1/2023'
+Moving Expense Coverage: '100%', '90%', '80%', '70%', '60%'
+Insurance Coverage: 'Plan A', 'Plan B', 'Plan C', 'Plan D', 'Plan E'
+Salary: '$50000', '$48000', '$46000', '$44000', '$42000'
+Location: 'New York', 'Boston', 'Chicago', 'Atlanta', 'San Francisco'
+-->
     <h1>Negotiation Points Calculator</h1>
     <div class="form">
         <label for="points">Desired Points:</label><br>
         <input type="number" id="points"><br>
         <label for="bonus">Bonus:</label><br>
-        <input type="number" id="bonus"><br>
+        <select id="bonus">
+            <option value="">Any</option>
+            <option value="10%">10%</option>
+            <option value="8%">8%</option>
+            <option value="6%">6%</option>
+            <option value="4%">4%</option>
+            <option value="2%">2%</option>
+        </select><br>
         <label for="job">Job Assignment:</label><br>
-        <input type="number" id="job"><br>
+        <select id="job">
+            <option value="">Any</option>
+            <option value="Division E">Division E</option>
+            <option value="Division D">Division D</option>
+            <option value="Division C">Division C</option>
+            <option value="Division B">Division B</option>
+            <option value="Division A">Division A</option>
+        </select><br>
         <label for="vacation">Vacation Time:</label><br>
-        <input type="number" id="vacation"><br>
+        <select id="vacation">
+            <option value="">Any</option>
+            <option value="25 days">25 days</option>
+            <option value="20 days">20 days</option>
+            <option value="15 days">15 days</option>
+            <option value="10 days">10 days</option>
+            <option value="5 days">5 days</option>
+        </select><br>
         <label for="start">Starting Date:</label><br>
-        <input type="number" id="start"><br>
+        <select id="start">
+            <option value="">Any</option>
+            <option value="6/1/2023">6/1/2023</option>
+            <option value="6/15/2023">6/15/2023</option>
+            <option value="7/1/2023">7/1/2023</option>
+            <option value="7/15/2023">7/15/2023</option>
+            <option value="8/1/2023">8/1/2023</option>
+        </select><br>
         <label for="move">Moving Expense Coverage:</label><br>
-        <input type="number" id="move"><br>
+        <select id="move">
+            <option value="">Any</option>
+            <option value="100%">100%</option>
+            <option value="90%">90%</option>
+            <option value="80%">80%</option>
+            <option value="70%">70%</option>
+            <option value="60%">60%</option>
+        </select><br>
         <label for="insurance">Insurance Coverage:</label><br>
-        <input type="number" id="insurance"><br>
+        <select id="insurance">
+            <option value="">Any</option>
+            <option value="Plan A">Plan A</option>
+            <option value="Plan B">Plan B</option>
+            <option value="Plan C">Plan C</option>
+            <option value="Plan D">Plan D</option>
+            <option value="Plan E">Plan E</option>
+        </select><br>
         <label for="salary">Salary:</label><br>
-        <input type="number" id="salary"><br>
+        <select id="salary">
+            <option value="">Any</option>
+            <option value="$50000">$50000</option>
+            <option value="$48000">$48000</option>
+            <option value="$46000">$46000</option>
+            <option value="$44000">$44000</option>
+            <option value="$42000">$42000</option>
+        </select><br>
         <label for="location">Location:</label><br>
-        <input type="number" id="location"><br>
+        <select id="location">
+            <option value="">Any</option>
+            <option value="New York">New York</option>
+            <option value="Boston">Boston</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Atlanta">Atlanta</option>
+            <option value="San Francisco">San Francisco</option>
+        </select><br>
         <button onclick="calculate()">Calculate</button>
     </div>
     <div id="output"></div>
